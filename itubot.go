@@ -6,10 +6,7 @@ import (
 	"time"
 
 	"github.com/adshao/go-binance/v2"
-	"github.com/asdine/storm"
 )
-
-const minBuyPrice = 11 // usdt
 
 func main() {
 
@@ -35,17 +32,6 @@ type Itubot struct {
 }
 
 func newItubot() (*Itubot, error) {
-	db, err := storm.Open("itubot.db")
-	if err != nil {
-		return nil, fmt.Errorf("error opening itubot database: %s", err.Error())
-	}
-
-	err = db.Init(&TradeSchedule{})
-	if err != nil {
-		return nil, fmt.Errorf("error initializing itubot database: %s", err.Error())
-	}
-
-	fmt.Println("=> Opened DB")
 
 	client := binance.NewClient(API_KEY, SECRET)
 
